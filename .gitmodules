@@ -1,0 +1,3 @@
+[submodule "kafka-connect-bintray"]
+	path = kafka-connect-bintray
+	url = https://github.com/gAmUssA/kafka-connect-bintray
