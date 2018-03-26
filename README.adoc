@@ -1,0 +1,28 @@
+== Installation
+
+1. Since this repository uses submodules, `git clone` with the `--recursive` option:
++
+
+----
+$ git clone --recursive https://github.com/russian-hackers/streams
+----
++
+
+Otherwise, `git clone` and then use the `submodule` commands to initialize and update:
++
+
+----
+$ git clone https://github.com/russian-hackers/streams russian-hackers-stream
+$ cd russian-hackers-stream
+$ git submodule init
+Submodule 'kafka-connect-bintray' (https://github.com/gAmUssA/kafka-connect-bintray) registered for path 'kafka-connect-bintray'
+$ git submodule update
+----
+
+
+== Misc
+
+.install maven wrapper
+----
+ mvn -N io.takari:maven:wrapper
+----
