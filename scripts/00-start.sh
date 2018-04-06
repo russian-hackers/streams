@@ -17,5 +17,5 @@ while [[ ! $(docker-compose logs control-center) =~ "Started NetworkTrafficServe
   fi
 done
 
-#./scripts/01-start-twitter-connector.sh
-#./scripts/03-rename-cluster.sh
+./scripts/01-start-bintray-connector.sh
+./scripts/03-rename-cluster.sh
