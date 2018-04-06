@@ -1,0 +1,13 @@
+{
+    "name": "bintray_source_json",
+    "config": {
+        "connector.class": "io.gamov.connect.bintray.BintraySourceConnector",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "bintray.api.url": "https://api.bintray.com",
+        "bintray.api.key": "",
+        "bintray.user": "",
+        "bintray.org": "russian-hackers",
+        "bintray.kafka.topic": "bintray"
+    }
+}
