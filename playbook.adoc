@@ -1,0 +1,26 @@
+
+[source,sql]
+----
+show topics;
+
+PRINT 'bintray' from beginning;
+CREATE STREAM bintray_raw (schema VARCHAR, payload VARCHAR) WITH (KAFKA_TOPIC='bintray',VALUE_FORMAT='JSON');
+
+SHOW streams;
+
+DESCRIBE stream;
+DESCRIBE extended stream;
+EXPLAIN stream_id;
+
+SELECT payload from bintray_raw;
+
+CREATE STREAM bintray_stream as select EXTRACTJSONFIELD(payload, '$.Path') as path, EXTRACTJSONFIELD(payload, '$.Type') as myType, EXTRACTJSONFIELD(payload, '$.UserAgent') as user_Agent, EXTRACTJSONFIELD(payload, '$.Subject') as subject, EXTRACTJSONFIELD (payload, '$.IpAddress') as ip, EXTRACTJSONFIELD(payload, '$.Time') as time from bintray_raw;
+
+-- brute force
+create table ips as SELECT IP, count(ip) AS ip_count, myType FROM bintray_stream window SESSION (300 second) where myType = 'login_failure' GROUP BY IP, myType;
+
+select ip, ip_count, mytype from ips where ip_count>5 limit 1;
+
+-- honeypod
+select path, ip from bintray_stream where path like '%public%';
+----
