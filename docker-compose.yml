@@ -2,7 +2,7 @@ version: "2.1"
 services:
   # Begin zookeeper section
   zookeeper:
-    image: confluentinc/cp-zookeeper:4.0.0
+    image: confluentinc/cp-zookeeper:4.1.0
     restart: always
     hostname: zookeeper
     environment:
@@ -16,7 +16,7 @@ services:
 
   # Begin kafka1 section
   kafka1:
-    image: confluentinc/cp-enterprise-kafka:4.0.0
+    image: confluentinc/cp-enterprise-kafka:4.1.0
     hostname: kafka1
     depends_on:
       - zookeeper
@@ -46,7 +46,7 @@ services:
 
   # Begin kafka2 section
   kafka2:
-    image: confluentinc/cp-enterprise-kafka:4.0.0
+    image: confluentinc/cp-enterprise-kafka:4.1.0
     hostname: kafka2
     depends_on:
       - zookeeper
@@ -73,7 +73,7 @@ services:
 
   # Begin Kafka Connect section
   connect:
-    image: confluentinc/cp-kafka-connect:4.0.0
+    image: confluentinc/cp-kafka-connect:4.1.0
     restart: always
     ports:
       - "8083:8083"
@@ -83,7 +83,7 @@ services:
       - schemaregistry
     volumes:
       - $PWD/connect-plugins:/connect-plugins
-      - $PWD/monitoring-interceptors/monitoring-interceptors-4.0.0.jar:/usr/share/java/monitoring-interceptors/monitoring-interceptors-4.0.0.jar
+      - $PWD/monitoring-interceptors/monitoring-interceptors-4.1.0.jar:/usr/share/java/monitoring-interceptors/monitoring-interceptors-4.1.0.jar
       - $PWD/scripts/consumer.properties:/usr/share/consumer.properties
     environment:
       CONNECT_BOOTSTRAP_SERVERS: "kafka1:9091,kafka2:9092"
@@ -107,12 +107,12 @@ services:
       CONNECT_PLUGIN_PATH: /connect-plugins
       CONNECT_LOG4J_ROOT_LOGLEVEL: INFO
       CONNECT_LOG4J_LOGGERS: org.reflections=ERROR
-      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-4.0.0.jar
+      CLASSPATH: /usr/share/java/monitoring-interceptors/monitoring-interceptors-4.1.0.jar
   # End Kafka Connect section
 
   # Begin Control Center section
   control-center:
-    image: confluentinc/cp-enterprise-control-center:4.0.0
+    image: confluentinc/cp-enterprise-control-center:4.1.0
     restart: always
     depends_on:
       - zookeeper
@@ -136,7 +136,7 @@ services:
 
   # Begin Schema Registry section
   schemaregistry:
-    image: confluentinc/cp-schema-registry:4.0.0
+    image: confluentinc/cp-schema-registry:4.1.0
     #restart: always
     depends_on:
       - zookeeper
@@ -150,7 +150,7 @@ services:
 
   # Begin kafka client section
   kafka-client:
-    image: confluentinc/cp-enterprise-kafka:4.0.0
+    image: confluentinc/cp-enterprise-kafka:4.1.0
     depends_on:
       - kafka1
     hostname: kafka-client
@@ -181,7 +181,7 @@ services:
     ports:
       - 9098:9098
     volumes:
-      - $PWD/monitoring-interceptors/monitoring-interceptors-4.0.0.jar:/usr/share/java/ksql-cli/monitoring-interceptors-4.0.0.jar
+      - $PWD/monitoring-interceptors/monitoring-interceptors-4.1.0.jar:/usr/share/java/ksql-cli/monitoring-interceptors-4.1.0.jar
       - $PWD/scripts/ksql.properties:/tmp/ksql.properties
       - $PWD/scripts/ksqlcommands:/tmp/ksqlcommands
     command: "perl -e 'while(1){ sleep 99999 }'"

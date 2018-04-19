@@ -5,7 +5,7 @@
 
 export PLUGINPATH:="connect-plugins"
 export INTERCEPTORSPATH:="monitoring-interceptors"
-export INTERCEPTORS_VERSION="4.0.0"
+export INTERCEPTORS_VERSION="4.1.0"
 
 all: install interceptors bintray
 
